@@ -7,6 +7,23 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_07():
+    with open("files/input/data.csv", "r") as files:
+        lines = files.readlines()
+    lista = [(int(elem.strip().split("\t")[1]), elem.strip().split("\t")[0]) for elem in lines]
+    lista
+
+    #NOTA: no se puede usar la función dict, porque en ese caso, si las claves se repiten, conserva únicamente el último valor
+
+    #Crear un diccionario para acumular los valores por clave
+    diccionario = {}
+
+    for clave, valor in lista:
+        diccionario[clave] = diccionario.get(clave, [])
+        diccionario[clave].append(valor)
+
+
+    resultado = sorted(diccionario.items())
+    return resultado
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla
     contiene un valor posible de la columna 2 y una lista con todas las letras
